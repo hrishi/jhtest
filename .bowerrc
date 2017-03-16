@@ -1,0 +1,7 @@
+{
+    "directory": "src/main/webapp/bower_components",
+	"proxy":"http://hrishikesh_agashe:Partners11!@ptproxy.persistent.co.in:8080",
+    "https-proxy":"https-proxy http://hrishikesh_agashe:Partners11!@ptproxy.persistent.co.in:8080",
+	"strict-ssl": false,
+	"registry": "http://bower.herokuapp.com"
+}

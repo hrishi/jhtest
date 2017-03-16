@@ -1,0 +1,11 @@
+entity Patient {
+	pid String,
+    name String,
+    age String,
+    gender String
+}
+
+// Set pagination options
+paginate Patient with pagination
+
+
