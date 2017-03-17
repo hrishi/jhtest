@@ -6,23 +6,23 @@ node {
     }
 
     stage('check java') {
-        sh "java -version"
+        cmd /c  "java -version"
     }
 
     stage('clean') {
-        sh "./mvnw clean"
+        cmd /c  "./mvnw clean"
     }
 
     stage('install tools') {
-        sh "./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v6.9.4 -DyarnVersion=v0.19.1"
+        cmd /c  "./mvnw com.github.eirslett:frontend-maven-plugin:install-node-and-yarn -DnodeVersion=v6.9.4 -DyarnVersion=v0.19.1"
     }
 
     stage('yarn install') {
-        sh "./mvnw com.github.eirslett:frontend-maven-plugin:yarn"
+        cmd /c  "./mvnw com.github.eirslett:frontend-maven-plugin:yarn"
     }
     stage('backend tests') {
         try {
-            sh "./mvnw test"
+            cmd /c  "./mvnw test"
         } catch(err) {
             throw err
         } finally {
@@ -32,7 +32,7 @@ node {
 
     stage('frontend tests') {
         try {
-            sh "./mvnw com.github.eirslett:frontend-maven-plugin:gulp -Dfrontend.gulp.arguments=test"
+            cmd /c  "./mvnw com.github.eirslett:frontend-maven-plugin:gulp -Dfrontend.gulp.arguments=test"
         } catch(err) {
             throw err
         } finally {
@@ -41,14 +41,14 @@ node {
     }
 
     stage('packaging') {
-        sh "./mvnw package -Pprod -DskipTests"
+        cmd /c  "./mvnw package -Pprod -DskipTests"
         archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
     }
 
     // Uncomment the following block to add Sonar analysis.
     /*stage('quality analysis') {
         withSonarQubeEnv('Sonar Server') {
-            sh "./mvnw sonar:sonar"
+            cmd /c  "./mvnw sonar:sonar"
         }
     }*/
 
